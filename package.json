@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "nitro build --host",
-    "dev": "nitro dev --host",
-    "start": "node ./index.js"
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "preview": "nitro preview"
   },
   "devDependencies": {
     "axios": "^1.9.0",

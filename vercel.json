@@ -6,16 +6,19 @@
     }
   },
   "version": 2,
-  "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
+  "buildCommand": "pnpm build",
+  "outputDirectory": ".output/public",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "nodejs18.x"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ]
 }

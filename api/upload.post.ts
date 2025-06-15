@@ -1,4 +1,3 @@
-import { formatDate } from '~/utils/format'
 import axios from 'axios'
 
 export default eventHandler(async (event) => {
