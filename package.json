@@ -1,0 +1,15 @@
+{
+  "name": "king-images-service",
+  "description": "this is image upload service",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nitro build --host",
+    "dev": "nitro dev --host"
+  },
+  "devDependencies": {
+    "axios": "^1.9.0",
+    "nitropack": "latest",
+    "qs": "^6.14.0"
+  }
+}

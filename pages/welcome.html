@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images Service</title>
+    <style>
+      :root {
+        --radius: 0.65rem;
+        --background: oklch(1 0 0);
+        --foreground: oklch(0.141 0.005 285.823);
+        --card: oklch(1 0 0);
+        --card-foreground: oklch(0.141 0.005 285.823);
+        --popover: oklch(1 0 0);
+        --popover-foreground: oklch(0.141 0.005 285.823);
+        --primary: oklch(0.623 0.214 259.815);
+        --primary-foreground: oklch(0.97 0.014 254.604);
+        --secondary: oklch(0.967 0.001 286.375);
+        --secondary-foreground: oklch(0.21 0.006 285.885);
+        --muted: oklch(0.967 0.001 286.375);
+        --muted-foreground: oklch(0.552 0.016 285.938);
+        --accent: oklch(0.967 0.001 286.375);
+        --accent-foreground: oklch(0.21 0.006 285.885);
+        --destructive: oklch(0.577 0.245 27.325);
+        --border: oklch(0.92 0.004 286.32);
+        --input: oklch(0.92 0.004 286.32);
+        --ring: oklch(0.623 0.214 259.815);
+        --chart-1: oklch(0.646 0.222 41.116);
+        --chart-2: oklch(0.6 0.118 184.704);
+        --chart-3: oklch(0.398 0.07 227.392);
+        --chart-4: oklch(0.828 0.189 84.429);
+        --chart-5: oklch(0.769 0.188 70.08);
+        --sidebar: oklch(0.985 0 0);
+        --sidebar-foreground: oklch(0.141 0.005 285.823);
+        --sidebar-primary: oklch(0.623 0.214 259.815);
+        --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
+        --sidebar-accent: oklch(0.967 0.001 286.375);
+        --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+        --sidebar-border: oklch(0.92 0.004 286.32);
+        --sidebar-ring: oklch(0.623 0.214 259.815);
+        --body-background: #f6f6f7;
+      }
+
+      .dark {
+        --background: #161616;
+        --foreground: oklch(0.985 0 0);
+        --card: oklch(0.21 0.006 285.885);
+        --card-foreground: oklch(0.985 0 0);
+        --popover: oklch(0.21 0.006 285.885);
+        --popover-foreground: oklch(0.985 0 0);
+        --primary: oklch(0.546 0.245 262.881);
+        --primary-foreground: oklch(0.379 0.146 265.522);
+        --secondary: oklch(0.274 0.006 286.033);
+        --secondary-foreground: oklch(0.985 0 0);
+        --muted: oklch(0.274 0.006 286.033);
+        --muted-foreground: oklch(0.705 0.015 286.067);
+        --accent: oklch(0.274 0.006 286.033);
+        --accent-foreground: oklch(0.985 0 0);
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: oklch(1 0 0 / 10%);
+        --input: oklch(1 0 0 / 15%);
+        --ring: oklch(0.488 0.243 264.376);
+        --chart-1: oklch(0.488 0.243 264.376);
+        --chart-2: oklch(0.696 0.17 162.48);
+        --chart-3: oklch(0.769 0.188 70.08);
+        --chart-4: oklch(0.627 0.265 303.9);
+        --chart-5: oklch(0.645 0.246 16.439);
+        --sidebar: oklch(0.21 0.006 285.885);
+        --sidebar-foreground: oklch(0.985 0 0);
+        --sidebar-primary: oklch(0.546 0.245 262.881);
+        --sidebar-primary-foreground: oklch(0.379 0.146 265.522);
+        --sidebar-accent: oklch(0.274 0.006 286.033);
+        --sidebar-accent-foreground: oklch(0.985 0 0);
+        --sidebar-border: oklch(1 0 0 / 10%);
+        --sidebar-ring: oklch(0.488 0.243 264.376);
+        --body-background: #0a0a0a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        background-color: var(--body-background);
+        color: var(--foreground);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+      }
+
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        background-color: var(--card);
+        border-radius: var(--radius);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        padding: 2.5rem;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      h1 {
+        color: var(--foreground);
+        font-size: 2.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      h1::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+        height: 0.25rem;
+        background: var(--primary);
+        border-radius: 9999px;
+      }
+
+      h2 {
+        color: var(--muted-foreground);
+        font-size: 1.125rem;
+        font-weight: 400;
+        margin-top: 1rem;
+      }
+
+      .api-section {
+        margin-top: 2.5rem;
+      }
+
+      .api-title {
+        font-size: 1.25rem;
+        color: var(--foreground);
+        margin-bottom: 1.25rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .api-title::before {
+        content: '';
+        display: block;
+        width: 0.25rem;
+        height: 1.25rem;
+        background: var(--primary);
+        border-radius: 9999px;
+      }
+
+      .api-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .api-item {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: all 0.2s ease;
+        overflow: hidden;
+      }
+
+      .api-item:hover {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 1px var(--primary);
+      }
+
+      .api-link {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1.25rem;
+        color: var(--foreground);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        position: relative;
+      }
+
+      .api-link:hover {
+        background-color: var(--accent);
+      }
+
+      .api-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .api-method {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        background-color: var(--accent);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: all 0.2s ease;
+      }
+
+      .api-item:hover .api-method {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+      }
+
+      .api-description {
+        font-size: 0.875rem;
+        color: var(--muted-foreground);
+        margin-top: 0.5rem;
+      }
+
+      .footer {
+        margin-top: 3rem;
+        text-align: center;
+        color: var(--muted-foreground);
+        font-size: 0.875rem;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--foreground);
+        cursor: pointer;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        background-color: var(--secondary);
+      }
+
+      .theme-toggle:hover {
+        background-color: var(--accent);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
+
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        .api-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+      🌙
+    </button>
+
+    <div class="container">
+      <div class="header">
+        <h1>Images Service</h1>
+        <h2>高效、安全的图片上传与管理服务</h2>
+      </div>
+
+      <div class="api-section">
+        <h3 class="api-title">API 接口</h3>
+        <ul class="api-list">
+          <li class="api-item">
+            <div class="api-link">
+              <div class="api-content">
+                <span class="api-path">/api/upload</span>
+                <span class="api-method">POST</span>
+              </div>
+              <div class="api-description">上传图片接口，支持多种格式</div>
+            </div>
+          </li>
+          <li class="api-item">
+            <div class="api-link">
+              <div class="api-content">
+                <span class="api-path">/api/myinfo</span>
+                <span class="api-method">GET</span>
+              </div>
+              <div class="api-description">获取用户信息</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer">
+        <p>
+          © <span id="current-year"></span> Images Service | 基于 Nitro 框架构建
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // 设置当前年份
+      document.getElementById('current-year').textContent =
+        new Date().getFullYear()
+
+      // 主题切换功能
+      const themeToggle = document.getElementById('theme-toggle')
+      const prefersDarkScheme = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      )
+
+      // 检查本地存储中的主题设置
+      const currentTheme = localStorage.getItem('theme')
+
+      // 根据本地存储或系统偏好设置初始主题
+      if (
+        currentTheme === 'dark' ||
+        (!currentTheme && prefersDarkScheme.matches)
+      ) {
+        document.body.classList.add('dark')
+        themeToggle.textContent = '☀️'
+      } else {
+        themeToggle.textContent = '🌙'
+      }
+
+      // 切换主题
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark')
+
+        // 更新图标
+        if (document.body.classList.contains('dark')) {
+          themeToggle.textContent = '☀️'
+          localStorage.setItem('theme', 'dark')
+        } else {
+          themeToggle.textContent = '🌙'
+          localStorage.setItem('theme', 'light')
+        }
+      })
+    </script>
+  </body>
+</html>
