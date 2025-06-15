@@ -7,7 +7,7 @@ export default defineEventHandler((event) => {
 
   try {
     // 获取HTML文件的绝对路径
-    const filePath = resolve(process.cwd(), 'public', 'welcome.html')
+    const filePath = resolve(process.cwd(), '.output', 'public', 'welcome.html')
     console.log(`🚀 filePath:`, filePath)
 
     // 读取HTML文件内容
