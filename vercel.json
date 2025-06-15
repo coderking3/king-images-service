@@ -7,10 +7,5 @@
   },
   "buildCommand": "pnpm run build",
   "outputDirectory": ".output/public",
-  "installCommand": "pnpm install",
-  "functions": {
-    "routes/**/*.ts": {
-      "runtime": "@vercel/node@18"
-    }
-  }
+  "installCommand": "pnpm install"
 }
