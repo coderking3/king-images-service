@@ -1,3 +1,12 @@
-# Nitro starter
+# king-images-service
 
-Look at the [nitro quick start](https://nitro.unjs.io/guide#quick-start) to learn more how to get started.
+this is image upload service
+
+## apis
+
+- `/api/myinfo`
+  - type: `GET`
+  - msg: 获取用户信息
+- `/api/upload`
+  - type: `POST`
+  - msg: 上传图片接口，支持多种格式
