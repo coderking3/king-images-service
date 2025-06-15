@@ -6,9 +6,6 @@ export default defineNitroConfig({
   devErrorHandler: errorHandler,
   errorHandler: '~/error',
   routeRules: {
-    '/': {
-      redirect: '/welcome.html',
-    },
     '/api/**': {
       cors: true,
       headers: {
