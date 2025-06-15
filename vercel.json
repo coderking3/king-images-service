@@ -5,7 +5,6 @@
       "main": true
     }
   },
-  "version": 2,
   "buildCommand": "pnpm build",
   "outputDirectory": ".output/public",
   "devCommand": "pnpm dev",
