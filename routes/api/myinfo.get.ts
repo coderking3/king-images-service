@@ -1,25 +1,12 @@
-import axios from 'axios'
+import { get } from '~/utils/request'
 
+// 获取用户信息
 export default eventHandler(async (event) => {
-  // 获取凭证
-  const SESSDATA = getCookie(event, 'SESSDATA')
-
-  // 获取用户信息
   const url = 'https://api.bilibili.com/x/space/myinfo'
-  const response = await axios({
-    method: 'GET',
-    url: url,
-    headers: {
-      Cookie: `SESSDATA=${SESSDATA}`,
-    },
+  const response = await get(url, {
+    withAuth: true,
+    event,
   })
-    .then(function (response) {
-      return response.data
-    })
-    .catch((error) => ({
-      code: -1,
-      message: error.message,
-    }))
 
   return response
 })
