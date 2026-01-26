@@ -6,11 +6,19 @@
   "scripts": {
     "build": "nitro build",
     "dev": "nitro dev",
-    "preview": "nitro preview"
+    "preview": "nitro preview",
+    "upload": "npx tsx scripts/upload.ts"
   },
   "devDependencies": {
+    "@types/node": "^25.0.10",
     "axios": "^1.9.0",
+    "dotenv": "^17.2.3",
     "nitropack": "latest",
-    "qs": "^6.14.0"
+    "qs": "^6.14.0",
+    "tsx": "^4.21.0"
+  },
+  "dependencies": {
+    "image-size": "^2.0.2",
+    "uuidjs": "^5.1.0"
   }
 }

@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { useResponseData, useResponseError } from '~/utils/process'
+import { API } from '~/constants'
 
 // 轮询二维码状态
 export default eventHandler(async (event) => {
   const { qrcode_key = '' } = getQuery(event)
 
-  const url = 'https://passport.bilibili.com/x/passport-login/web/qrcode/poll'
   const response = await axios({
     method: 'GET',
-    url: url,
+    url: API.QRCODE_POLL,
     params: { qrcode_key },
   })
     .then(useResponseData)

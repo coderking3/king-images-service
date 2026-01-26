@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useResponseData, useResponseError } from '~/utils/process'
 import { getCertificate } from '~/utils/cookie'
+import { API } from '~/constants'
 
 export default eventHandler(async (event) => {
   const SESSDATA = getCertificate(event, 'SESSDATA')
@@ -21,11 +22,9 @@ export default eventHandler(async (event) => {
   formParams.append('csrf', bili_jct)
   formParams.append('bucket', 'openplatform')
 
-  const url = 'https://api.bilibili.com/x/upload/web/image'
-
   const result = await axios({
     method: 'POST',
-    url: url,
+    url: API.UPLOAD_IMAGE,
     data: formParams,
     headers: {
       'Content-Type': 'multipart/form-data',
